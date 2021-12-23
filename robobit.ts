@@ -183,6 +183,9 @@ enum RBColors {
 
 /**
  * Custom blocks
+ * KEYESTUDIO Motor Shield Pins
+ * Motor 1 - Forward - P13(high), P12(low), PWM - P1
+ * Motor 2 - Forward - P15(high), P16(low),PWM - P2
  */
 //% weight=50 color=#e7660b icon="\uf1ba"
 //% groups='["New style blocks","Basic","Advanced","Special","Ultrasonic","Line Sensor","5x5 Matrix","BitFace","OLED 128x64","Old style blocks"]'
@@ -203,14 +206,14 @@ namespace robobit {
     let leftBias = 0;
     let rightBias = 0;
 
-    let lMotorD0 = DigitalPin.P0;
-    let lMotorD1 = DigitalPin.P8;
+    let lMotorD0 = DigitalPin.P13;
+    let lMotorD1 = DigitalPin.P12;
     let lMotorA0 = AnalogPin.P0;
-    let lMotorA1 = AnalogPin.P8;
-    let rMotorD0 = DigitalPin.P1;
-    let rMotorD1 = DigitalPin.P12;
+    let lMotorA1 = AnalogPin.P0;
+    let rMotorD0 = DigitalPin.P15;
+    let rMotorD1 = DigitalPin.P16;
     let rMotorA0 = AnalogPin.P1;
-    let rMotorA1 = AnalogPin.P12;
+    let rMotorA1 = AnalogPin.P1;
 
     let _model: RBModel;
     let larsson: number;
@@ -376,21 +379,25 @@ namespace robobit {
         if ((motor == RBMotor.Left) || (motor == RBMotor.Both)) {
             if (direction == RBDirection.Forward) {
                 pins.analogWritePin(lMotorA0, lSpeed);
-                pins.analogWritePin(lMotorA1, 0);
+                pins.digitalWritePin(lMotorD0, 1);
+                pins.digitalWritePin(lMotorD1, 0);
             }
             else {
-                pins.analogWritePin(lMotorA0, 0);
-                pins.analogWritePin(lMotorA1, lSpeed);
+                pins.analogWritePin(lMotorA0, lSpeed);
+                pins.digitalWritePin(lMotorD0, 0);
+                pins.digitalWritePin(lMotorD1, 1);
             }
         }
         if ((motor == RBMotor.Right) || (motor == RBMotor.Both)) {
             if (direction == RBDirection.Forward) {
                 pins.analogWritePin(rMotorA0, rSpeed);
-                pins.analogWritePin(rMotorA1, 0);
+                pins.digitalWritePin(rMotorD0, 1);
+                pins.digitalWritePin(rMotorD1, 0);
             }
             else {
-                pins.analogWritePin(rMotorA0, 0);
-                pins.analogWritePin(rMotorA1, rSpeed);
+                pins.analogWritePin(rMotorA0, rSpeed);
+                pins.digitalWritePin(rMotorD0, 0);
+                pins.digitalWritePin(rMotorD1, 1);
             }
         }
     }
