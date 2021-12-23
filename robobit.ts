@@ -209,11 +209,9 @@ namespace robobit {
     let lMotorD0 = DigitalPin.P13;
     let lMotorD1 = DigitalPin.P12;
     let lMotorA0 = AnalogPin.P0;
-    let lMotorA1 = AnalogPin.P0;
     let rMotorD0 = DigitalPin.P15;
     let rMotorD1 = DigitalPin.P16;
     let rMotorA0 = AnalogPin.P1;
-    let rMotorA1 = AnalogPin.P1;
 
     let _model: RBModel;
     let larsson: number;
@@ -531,11 +529,13 @@ namespace robobit {
         }
         if ((motor == RBMotor.Left) || (motor == RBMotor.Both)) {
             pins.analogWritePin(AnalogPin.P0, realSpeed);
-            pins.digitalWritePin(DigitalPin.P8, forward ? 0 : 1);
+            pins.digitalWritePin(DigitalPin.P12, forward ? 0 : 1);
+            pins.digitalWritePin(DigitalPin.P13, forward ? 1 : 0);
         }
         if ((motor == RBMotor.Right) || (motor == RBMotor.Both)) {
             pins.analogWritePin(AnalogPin.P1, realSpeed);
-            pins.digitalWritePin(DigitalPin.P12, forward ? 0 : 1);
+            pins.digitalWritePin(DigitalPin.P16, forward ? 0 : 1);
+            pins.digitalWritePin(DigitalPin.P15, forward ? 1 : 0);
         }
     }
 
