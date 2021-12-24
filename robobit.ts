@@ -817,11 +817,11 @@ namespace robobit {
     //% subcategory="Inputs & Outputs"
     export function sonar(unit: RBPingUnit): number {
         // send pulse
-        let trig = DigitalPin.P13;
+        let trig = DigitalPin.P10;
         if (_model == RBModel.Mk3)
-            trig = DigitalPin.P15;
+            trig = DigitalPin.P10;
         if (_model == RBModel.Mk2A)
-            trig = DigitalPin.P15;
+            trig = DigitalPin.P10;
         let echo = trig;
         let maxCmDistance = 500;
         let d = 10;
@@ -854,15 +854,15 @@ namespace robobit {
     export function readLine(sensor: RBLineSensor): number {
         if (sensor == RBLineSensor.Left) {
             if (_model == RBModel.Mk3)
-                return pins.digitalReadPin(DigitalPin.P16);
+                return pins.digitalReadPin(DigitalPin.P10);
             else
-                return pins.digitalReadPin(DigitalPin.P11);
+                return pins.digitalReadPin(DigitalPin.P10);
         }
         else {
             if (_model == RBModel.Mk3)
-                return pins.digitalReadPin(DigitalPin.P14);
+                return pins.digitalReadPin(DigitalPin.P10);
             else
-                return pins.digitalReadPin(DigitalPin.P5);
+                return pins.digitalReadPin(DigitalPin.P10);
         }
     }
 
@@ -876,7 +876,7 @@ namespace robobit {
     //% subcategory="Inputs & Outputs"
     export function setTalon(degrees: number): void {
         degrees = clamp(degrees, 0, 80);
-        pins.servoWritePin(AnalogPin.P13, degrees);
+        pins.servoWritePin(AnalogPin.P10, degrees);
     }
 
     // Addon Boards
@@ -886,7 +886,7 @@ namespace robobit {
     /* create a FireLed band for the Matrix if not got one already. Default to brightness 40 */
     function mat5(): fireled.Band {
         if (!matrix5) {
-            matrix5 = fireled.newBand(DigitalPin.P15, 25);
+            matrix5 = fireled.newBand(DigitalPin.P10, 25);
             matrix5.setBrightness(40);
         }
         return matrix5;
@@ -1123,7 +1123,7 @@ namespace robobit {
     /* create a FireLed band for the BitFace if not got one already. Default to brightness 40 */
     function bitf(): fireled.Band {
         if (!bitface) {
-            bitface = fireled.newBand(DigitalPin.P15, 17);
+            bitface = fireled.newBand(DigitalPin.P10, 17);
             bitface.setBrightness(40);
         }
         return bitface;
@@ -1186,7 +1186,7 @@ namespace robobit {
     //% group="BitFace"
     //% blockGap=8
     export function setBitNose(rgb: number) {
-        bitf().setPixel(14, rgb);
+        bitf().setPixel(10, rgb);
         bitfUpdate();
     }
 
