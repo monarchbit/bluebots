@@ -208,10 +208,10 @@ namespace robobit {
 
     let lMotorD0 = DigitalPin.P13;
     let lMotorD1 = DigitalPin.P12;
-    let lMotorA0 = AnalogPin.P0;
+    let lMotorA0 = AnalogPin.P1;
     let rMotorD0 = DigitalPin.P15;
     let rMotorD1 = DigitalPin.P16;
-    let rMotorA0 = AnalogPin.P1;
+    let rMotorA0 = AnalogPin.P2;
 
     let _model: RBModel;
     let larsson: number;
@@ -258,11 +258,19 @@ namespace robobit {
     // slow PWM frequency for slower speeds to improve torque
     function setPWM(speed: number): void {
         if (speed < 200)
-            pins.analogSetPeriod(AnalogPin.P0, 60000);
+           { pins.analogSetPeriod(AnalogPin.P1, 60000);
+            pins.analogSetPeriod(AnalogPin.P2, 60000);
+           }
         else if (speed < 300)
-            pins.analogSetPeriod(AnalogPin.P0, 40000);
+            {
+            pins.analogSetPeriod(AnalogPin.P1, 40000);
+            pins.analogSetPeriod(AnalogPin.P2, 60000);
+            }
         else
-            pins.analogSetPeriod(AnalogPin.P0, 30000);
+            {
+            pins.analogSetPeriod(AnalogPin.P1, 30000);
+            pins.analogSetPeriod(AnalogPin.P2, 60000);
+            }
     }
 
     /**
